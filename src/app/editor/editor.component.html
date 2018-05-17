@@ -1,2 +1,6 @@
-<ngx-monaco-editor [options]="editorOptions" [model]="model" [(ngModel)]="code"></ngx-monaco-editor>
-<p>{{code}}</p>
+<div class="editor-card">
+  <h2>filename.json</h2>
+  <ngx-monaco-editor class="editor" [style.height.px]="containerHeight" [options]="editorOptions" [(ngModel)]="code" (onInit)="onMonacoInit($event)"
+    (ngModelChange)="setHeightOfContainer($event)">
+  </ngx-monaco-editor>
+</div>
