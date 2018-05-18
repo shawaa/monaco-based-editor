@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NgxEditorModel, NgxMonacoEditorConfig } from 'ngx-monaco-editor';
+import { Component, OnInit, Input } from '@angular/core';
+import { NgxEditorModel } from 'ngx-monaco-editor';
 import { environment } from '../../environments/environment.prod';
 
 @Component({
@@ -8,6 +8,9 @@ import { environment } from '../../environments/environment.prod';
   styleUrls: ['./editor.component.css'],
 })
 export class EditorComponent implements OnInit {
+  
+  @Input() schema: string;
+  @Input() default: string;
   
   private code: string;
 
@@ -20,8 +23,11 @@ export class EditorComponent implements OnInit {
     scrollBeyondLastLine: false,
     minimap: {
       enabled: false
-    }
+    },
+    automaticLayout : true
   }
+
+  private configModel: NgxEditorModel 
 
   private lineHeight: number;
 
@@ -35,7 +41,7 @@ export class EditorComponent implements OnInit {
   }
 
   setHeightOfContainer() {
-    this.containerHeight = Math.max((this.editor.viewModel.lines.lines.length * this.lineHeight) + this.lineHeight, this.lineHeight * 10.5);
+    this.containerHeight = Math.max((this.editor.viewModel.lines.lines.length * this.lineHeight) + (this.lineHeight * 3), this.lineHeight * 10.5);
     this.editor.layout({
       width: this.container.offsetWidth,
       height: this.containerHeight
@@ -46,9 +52,14 @@ export class EditorComponent implements OnInit {
     this.lineHeight = editor.viewModel.configuration.editor.lineHeight;
     this.container = editor.domElement;
     this.editor = editor;
+    console.log(editor);
   }
 
-  ngOnInit() {    
-    this.setHeightOfContainer()
+  ngOnInit() {  
+    this.configModel = {
+      language: 'json',
+      uri: this.schema + '.json',
+      value: this.default
+    };
   }
 }
