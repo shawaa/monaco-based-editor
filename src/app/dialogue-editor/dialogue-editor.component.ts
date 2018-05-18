@@ -17,6 +17,16 @@ export class DialogueEditorComponent implements OnInit {
     default: '[\n\t{\n\t\t"type":"message"\n\t}\n]'
   };
 
+  private model = {
+    schema: 'model',
+    default: '{\n\t\n}'
+  };
+
+  private entities = {
+    schema: 'entities',
+    default: '{\n\t\n}'
+  };
+
   constructor() { }
 
   ngOnInit() {

@@ -22,6 +22,16 @@ const monacoConfig: NgxMonacoEditorConfig = {
         uri: 'nodesSchema.json',
         fileMatch: ['nodes.json'],
         schema: GetNodesSchema()
+      },
+      {
+        uri: 'modelSchema.json',
+        fileMatch: ['model.json'],
+        schema: GetModelSchema()
+      },
+      {
+        uri: 'entitiesSchema.json',
+        fileMatch: ['entities.json'],
+        schema: GetEntitiesSchema()
       }],
       allowComments: false
     });
@@ -43,6 +53,20 @@ const monacoConfig: NgxMonacoEditorConfig = {
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+function GetModelSchema(): any {
+  return {
+    "$ref": "#/definitions/patterns/propertiesObject",
+    "definitions": GetSchemaDefinitions()
+  }
+}
+
+function GetEntitiesSchema(): any {
+  return {
+    "$ref": "#/definitions/patterns/propertiesObject",
+    "definitions": GetSchemaDefinitions()
+  }
+}
 
 function GetTriggerSchema(): any {
   const triggerSchema = {

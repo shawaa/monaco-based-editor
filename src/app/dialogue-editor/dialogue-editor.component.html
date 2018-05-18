@@ -1,5 +1,8 @@
 <div class="editor-card">
   <input type="text" placeholder="Dialogue Title" />
+  Is background <input type="checkbox" />
 </div>
 <app-editor [schema]="trigger.schema" [default]="trigger.default">Trigger</app-editor>
 <app-editor [schema]="nodes.schema" [default]="nodes.default">Nodes</app-editor>
+<app-editor [schema]="model.schema" [default]="model.default">Model</app-editor>
+<app-editor [schema]="entities.schema" [default]="entities.default">Entities</app-editor>
